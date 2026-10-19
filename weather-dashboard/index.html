@@ -1,75 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marina Analytics | Dashboard</title>
+  <meta name="theme-color" content="#10172a">
+  <title>Weather Telemetry | Live Dashboard</title>
   <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <main class="dashboard-root">
-    <header class="dashboard-header">
-      <h1>Live Weather Telemetry</h1>
+  <script src="dashboard.js" defer></script>
+  </head>
+
+  <body class="weather-clear">
+  <main class="dashboard">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Weather Telemetry home">
+        <span class="brand-icon">◉</span>
+        WEATHER<span>TELEMETRY</span>
+      </a>
+      <span class="live-status">
+        <span class="status-dot"></span> LIVE WEATHER
+        </span>
     </header>
 
-    <section aria-label="Station Search Pipeline">
-      <form id="weather-lookup-form" novalidate>
-        <div class="field-group">
-          <label for="station-input" class="field-label">Station Identifier / Location</label>
-          <div class="field-control-row">
-            <input 
-              type="text" 
-              id="station-input" 
-              required 
-              aria-required="true"
-              aria-describedby="validation-error-msg"
-              placeholder="e.g., Newport Marina East"
-              autocomplete="off"
-            >
-            <button type="submit" class="btn-primary">Query Station</button>
-          </div>
-          <span id="validation-error-msg" class="field-error-text" role="alert">
-            Invalid input syntax. Use alphanumeric values, spaces, commas, or periods.
-          </span>
-        </div>
+      <section class="search-section">
+      <p class="eyebrow">GLOBAL WEATHER MONITOR</p>
+      <h1>Weather, <span>in real time.</span></h1>
+      <p class="subtitle">Explore current conditions and forecasts anywhere on Earth.</p>
+
+            <form id="weather-lookup-form" class="search-form">
+        <label class="sr-only" for="station-input">Search for a city</label>
+
+         <span aria-hidden="true">⌕</span>
+        <input
+                  id="station-input"
+          type="search"
+          placeholder="Search city, e.g. Lagos, London..."
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit" id="search-button">Search ↗</button>
       </form>
+
+      <p id="validation-error-msg" class="error-message" role="alert"></p>
     </section>
 
-    <section class="state-container" aria-live="polite">
-      <div id="ui-loading-spinner" class="ui-state-spinner" role="status">
-        <span class="spinner-element"></span>
-        <span class="spinner-text">Resolving telemetry matrix...</span>
-      </div>
 
-      <div id="ui-empty-state" class="ui-state-empty" role="status">
-        No active telemetry tracks found matching the designated station.
-      </div>
+        <section id="ui-loading-spinner" class="loading-state" role="status" hidden>
+          <span class="spinner-element"></span>
+      <p>Fetching live weather data...</p>
+      </section>
 
-      <article id="ui-data-view" class="telemetry-card">
-        <header class="card-header">
-          <h3 id="render-station-title" class="station-title">--</h3>
-        </header>
-        <div class="telemetry-grid">
-          <div class="metric-tile">
-            <span class="tile-label">Air Temperature</span>
-            <span id="metric-temp" class="tile-value">--</span>
+      <section id="ui-empty-state" class="error-panel" role="alert" hidden>
+      <span>⚠</span>
+      <h2>Weather unavailable</h2>
+      <p id="error-detail">We couldn't find that city. Check the spelling and try again.</p>
+    </section>
+
+
+
+    <div id="weather-content" hidden>
+      <section id="ui-data-view" class="weather-hero">
+        <div class="hero-heading">
+          <div>
+            <p class="eyebrow">CURRENT CONDITIONS</p>
+            <h2 id="render-station-title">--</h2>
+            <p id="weather-date" class="muted">Local weather</p>
+            <span id="weather-icon" class="main-weather-icon" aria-label="Weather condition">☀️</span>
           </div>
-          <div class="metric-tile">
-            <span class="tile-label">Wind Velocity</span>
-            <span id="metric-wind" class="tile-value">--</span>
-          </div>
-          <div class="metric-tile">
-            <span class="tile-label">Wave Height</span>
-            <span id="metric-waves" class="tile-value">--</span>
-          </div>
-          <div class="metric-tile">
-            <span class="tile-label">Barometric Pressure</span>
-            <span id="metric-pressure" class="tile-value">--</span>
+
+          <div class="temperature-row">
+          <span id="metric-temp" class="temperature">--°</span>
+          <div>
+            <p id="weather-description" class="condition">Loading...</p>
+            <p id="feels-like" class="muted">Feels like --°C</p>
           </div>
         </div>
-      </article>
-    </section>
+
+
+         <div class="metrics-grid">
+          <article class="metric-tile">
+            <span class="metric-icon">💧</span>
+            <p>Humidity</p>
+            <strong id="metric-humidity">--%</strong>
+            </article>
+
+
+             <article class="metric-tile">
+            <span class="metric-icon">💨</span>
+            <p>Wind speed</p>
+            <strong id="metric-wind">-- m/s</strong>
+          </article>
+
+          <article class="metric-tile">
+            <span class="metric-icon">◉</span>
+            <p>Pressure</p>
+            <strong id="metric-pressure">-- hPa</strong>
+          </article>
+        </div>
+      </section>
+
+
+      <section class="forecast-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PLAN AHEAD</p>
+            <h2>5-day forecast</h2>
+          </div>
+
+           <span class="muted">Daily outlook</span>
+        </div>
+        <div id="forecast-list" class="forecast-list"></div>
+      </section>
+    </div>
+
+    <footer>
+      <span>WEATHER TELEMETRY</span>
+      <span>Weather data powered by OpenWeatherMap</span>
+    </footer>
   </main>
-  <script src="dashboard.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

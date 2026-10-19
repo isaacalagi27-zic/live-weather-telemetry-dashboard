@@ -1,39 +1,49 @@
 # Live Weather Telemetry Dashboard
 
-Fully interactive client-side weather monitoring module built to manage marina microclimate conditions and live station telemetry.
+A responsive weather dashboard built with HTML, CSS, and JavaScript. It uses the OpenWeatherMap API to display current weather conditions and a five-day forecast for cities around the world.
 
-#Core Project Features:
-Base MVP Layout:
+## Features
 
-Responsive metrics display designed to adapt to various screen sizes.
+- Search for weather by city name
+- Current temperature and feels-like temperature
+- Weather conditions and dynamic icons
+- Humidity, wind speed, and atmospheric pressure
+- Five-day weather forecast
+- Loading indicator and error handling
+- Responsive layout for desktop and mobile screens
+- Weather-based background styling
 
-Dynamic state configurations, including loading spin transitions.
+## Technologies Used
 
-Empty track fallbacks to handle missing data gracefully.
+- HTML5
+- CSS3 (Flexbox and responsive media queries)
+- JavaScript
+- Fetch API and async/await
+- OpenWeatherMap API
 
-Real-time dashboard binding for live data updates.
+## How to Run
 
-Phase 2 Optimization:
+1. Clone or download this repository.
+2. Open `weather-dashboard/index.html` in a browser, or use a local web server.
+3. Add your own OpenWeatherMap API key in the JavaScript configuration before testing.
 
-Deterministic calculation engine that provides distinct variable outputs for each station identifier.
+**Security note:** Never commit a real API key to a public repository. A production deployment should retrieve weather data through a server-side proxy that protects the key.
 
-Strict input-invalid validation to ensure data integrity.
+## Project Structure
 
-Secure textContent DOM injection protocols to prevent security vulnerabilities.
+```text
+live-weather-telemetry-dashboard/
+├── README.md
+└── weather-dashboard/
+    ├── index.html
+    ├── styles.css
+    └── dashboard.js
+```
 
-Technical Highlights
-Core Focus: Fully interactive client-side weather monitoring built specifically to manage marina microclimate conditions and live station telemetry.
+## Weather Data
 
-#Language Breakdown:
+Weather information is provided by OpenWeatherMap. Forecasts are estimates and may change.
 
-CSS: 38.2% (Custom UI styling and responsive layouts)
+## Author
 
-JavaScript: 34.7% (Telemetry logic and calculation engine)
-
-HTML: 27.1% (Semantic structure and layout skeleton)
-
-#Production Links:
-
-Live Website URL: https://darling-gingersnap-272508.netlify.app/
-
-GitHub Repository: https://github.com/munnaA-hub/live-weather-telemetry-dashboard
+Isaac Alagi
