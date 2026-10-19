@@ -1,4 +1,4 @@
-const API_KEY = "c88c80202409847287352406c1866da2";
+const API_KEY = "0f56aa42cf00ae52a275a208b9e9e272";
 
 // Get the HTML elements
 const searchForm = document.getElementById("weather-lookup-form");
